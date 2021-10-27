@@ -1,0 +1,6 @@
+FROM postgres:buster
+RUN if [ ! -d "/docker-entrypoint-initdb.d" ]; then mkdir "/docker-entrypoint-initdb.d"; fi
+COPY ./databases/postgres/init.d /docker-entrypoint-initdb.d
+USER root
+RUN chown -R postgres: /docker-entrypoint-initdb.d
+USER postgres
